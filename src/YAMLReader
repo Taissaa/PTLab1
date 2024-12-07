@@ -8,3 +8,16 @@ import DataReader
 class YAMLReader(DataReader): 
     def read(self, path:str) -> DataType:
         data: DataType = {}
+
+        file_path = Path(path)
+        if not file_path.exists():
+            raise FileNotFoundError('File not found')
+
+        with file_path.open('r', encoding='utf8') as file:
+            yaml_data = yaml.safe_load(file)
+
+        for key, value in yaml_data.items():
+            data[key] = [(subject, mark)
+                        for subject, mark in value.items()]
+
+            return data
