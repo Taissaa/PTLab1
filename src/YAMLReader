@@ -1,0 +1,10 @@
+import yaml
+from pathlib import Path
+
+from Types import DataType
+import DataReader
+
+
+class YAMLReader(DataReader): 
+    def read(self, path:str) -> DataType:
+        data: DataType = {}
